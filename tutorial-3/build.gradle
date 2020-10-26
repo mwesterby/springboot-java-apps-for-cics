@@ -1,0 +1,54 @@
+plugins {
+	 id 'org.springframework.boot' version '2.3.0.RELEASE'
+	 id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	 id 'java'
+	 id 'eclipse'    
+	 id 'war'
+}
+
+group = 'com.ibm.cicsdev.springboot'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+archivesBaseName='cics-java-liberty-springboot-jcics'
+version = '0.1.0'
+ 
+repositories {
+	mavenCentral()
+}
+
+eclipse {
+     classpath {
+         downloadJavadoc = true
+     }
+ }
+
+dependencies {
+	// Spring Boot web support
+	implementation("org.springframework.boot:spring-boot-starter-web")  
+	
+	// Don't include TomCat in the runtime build       
+	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+	
+	// CICS BOM (as of May 2020)
+	compileOnly enforcedPlatform("com.ibm.cics:com.ibm.cics.ts.bom:5.5-20200519131930-PH25409")
+	
+	// Don't include JCICS in the final build (no need for version because we have BOM)
+	compileOnly("com.ibm.cics:com.ibm.cics.server")
+	
+	 // Java Transaction API (this is newer and covers up to jta-1.3)
+    implementation ("javax.transaction:javax.transaction-api")
+    
+    // Spring's Transactional API
+    implementation ("org.springframework:spring-tx")
+    
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	
+	// Dev Tools for refreshing the server when in development
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+test {
+	useJUnitPlatform()
+}
