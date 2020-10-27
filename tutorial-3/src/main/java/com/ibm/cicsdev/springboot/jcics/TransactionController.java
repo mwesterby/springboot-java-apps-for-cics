@@ -55,4 +55,27 @@ public class TransactionController
             return "transactionalRollback: exception: "  + e.getMessage() + ". Rollback triggered - see dfhjvmerr for further details.";
         }       
     }
+    
+    @Autowired SpringTransactionTemplate springTemplateTran;
+
+    /**
+     * Spring Template managed transaction commit web request
+     * @return message
+     */
+    @GetMapping({"/STcommit", "/stcommit"})
+    public String springTemplateCommit() 
+    {
+        return this.springTemplateTran.writeTSQ("hello CICS from springTemplateCommit()");
+    }
+
+
+    /**
+     * Spring Template managed transaction rollback web request
+     * @return message
+     */
+    @GetMapping({"/STrollback", "/strollback"})
+    public String springTemplateRollback() 
+    {
+        return this.springTemplateTran.writeTSQ("rollback from springTemplateRollback()");
+    }
 }
