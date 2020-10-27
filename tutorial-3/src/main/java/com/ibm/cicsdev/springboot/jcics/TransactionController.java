@@ -7,10 +7,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TransactionController 
 {   
+    /**
+     * Provide a root for Usage: information
+     * @return usage message
+     */
     @GetMapping("/")
     public String index() 
-    {
-        return "Greetings from com.ibm.cicsdev.springboot.transaction servlet";       
+    {               
+        return "<h1>Spring Boot Transaction REST sample</h1>"
+                + "<h3>Usage:</h3>"
+                + "<b>/transactionalCommit</b> - Demo Spring Transactional annotation commit <br>"
+                + "<b>/transactionalRollback</b> - Demo Spring Transactional annotation rollback <br>"
+                + "<b>/STcommit</b> - Demo Spring Template commit <br>"
+                + "<b>/STrollback</b> - Demo Spring Template rollback <br>"             
+                + "<b>/JEEcommit</b> - Demo Java EE User Transaction commit <br>"
+                + "<b>/JEErollback</b> - Demo Java EE User Transaction rollback";
     }
     
     @Autowired SpringTransactional transactional;
@@ -77,5 +88,28 @@ public class TransactionController
     public String springTemplateRollback() 
     {
         return this.springTemplateTran.writeTSQ("rollback from springTemplateRollback()");
+    }
+    
+    @Autowired JEEUserTransaction jeeTran;
+
+    /**
+     * JEE UserTransaction commit
+     * @return message
+     */
+    @GetMapping({"/JEEcommit", "/jeecommit"})
+    public String javaEECommit() 
+    {
+        return this.jeeTran.writeTSQ("hello CICS from javaEECommit()");             
+    }
+
+
+    /**
+     * JEE UserTransaction rollback
+     * @return message
+     */
+    @GetMapping({"/JEErollback", "/jeerollback"})
+    public String javaEErollback() 
+    {
+        return this.jeeTran.writeTSQ("rollback from javaEERollback()");     
     }
 }
