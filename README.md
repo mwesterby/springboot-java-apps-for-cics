@@ -1,5 +1,8 @@
 # springboot-java-apps-for-cics
 
-A simple Spring Boot web application that makes use of the JCICS API. This was created following the [Spring Boot Java applications for CICS, Part 1: JCICS, Gradle, and Maven](https://developer.ibm.com/tutorials/spring-boot-java-applications-for-cics-part-1-jcics-maven-gradle/) tutorial.
+Spring Boot web applications that makes use of the JCICS API. This was created following the [Spring Boot Java applications for CICS Tutorial Series](https://developer.ibm.com/series/learning-path-spring-boot-java-applications-for-cics/).
 
-Additional deployment instructions can be found [here](https://github.com/cicsdev/cics-java-liberty-springboot-jcics).
+- [Tutorial 1](./tutorial-1) - JCICS
+  - [Deployment instructions](https://github.com/cicsdev/cics-java-liberty-springboot-jcics).
+- [Tutorial 3](./tutorial-3) - Transactions
+  - [Deployment instructions](https://github.com/cicsdev/cics-java-liberty-springboot-transactions).
